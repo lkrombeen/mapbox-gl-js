@@ -87,6 +87,21 @@ class SpriteAtlas extends Evented {
         this.fire('data', {dataType: 'style'});
     }
 
+    removeImage(name) {
+        const image = this.images[name];
+
+        if (!image) {
+            this.fire('error', {error: new Error('No image with this name exists.')});
+        }
+
+        const rect = this.atlas.getBin(name);
+
+        this.copy(new Uint32Array(image.width * image.height), image.width, rect, {pixelRatio: this.pixelRatio, x: 0, y: 0, width: image.width, height: image.height}, false);
+        this.atlas.deref(rect);
+
+        this.fire('data', {dataType: 'style'});
+    }
+
     getImage(name, wrap) {
         if (this.images[name]) {
             return this.images[name];
