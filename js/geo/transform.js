@@ -366,7 +366,6 @@ class Transform {
         mat4.translate(posMatrix, posMatrix, [coord.column * scale, coord.row * scale, 0]);
         mat4.scale(posMatrix, posMatrix, [ scale / EXTENT, scale / EXTENT, 1 ]);
         mat4.multiply(posMatrix, this.projMatrix, posMatrix);
-
         return new Float32Array(posMatrix);
     }
 
